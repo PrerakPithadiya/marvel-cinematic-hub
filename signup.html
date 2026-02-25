@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Elite Marvel Signup with Username Field</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ea2a33",
+                        "stark-blue": "#00f2ff",
+                        "stark-blue-glow": "rgba(0, 242, 255, 0.4)",
+                        "background-dark": "#020408",
+                        "hologram-blue": "rgba(0, 242, 255, 0.05)",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @keyframes drift {
+            0% { transform: scale(1.1) translate(0, 0); }
+            50% { transform: scale(1.15) translate(-1%, -1%); }
+            100% { transform: scale(1.1) translate(0, 0); }
+        }
+        @keyframes laser-scan {
+            0% { left: -100%; opacity: 0; }
+            50% { opacity: 1; }
+            100% { left: 100%; opacity: 0; }
+        }
+        @keyframes float-particle {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.2; }
+            50% { transform: translateY(-40px) translateX(20px); opacity: 0.5; }
+        }
+        @keyframes holographic-flicker {
+            0% { opacity: 0.8; }
+            5% { opacity: 0.4; }
+            10% { opacity: 0.8; }
+            100% { opacity: 0.9; }
+        }
+        @keyframes arc-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 242, 255, 0.4), inset 0 0 15px rgba(0, 242, 255, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(0, 242, 255, 0.8), inset 0 0 25px rgba(0, 242, 255, 0.5); }
+        }
+        @keyframes rotate-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .holographic-card {
+            background: linear-gradient(135deg, rgba(0, 242, 255, 0.03) 0%, rgba(0, 242, 255, 0.08) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 242, 255, 0.05);
+            animation: holographic-flicker 10s infinite;
+        }
+        .hologram-grid {
+            background-image: 
+                linear-gradient(rgba(0, 242, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .laser-line {
+            height: 2px;
+            width: 50%;
+            background: linear-gradient(90deg, transparent, #00f2ff, transparent);
+            position: absolute;
+            bottom: 0;
+            animation: laser-scan 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+        .arc-reactor-btn {
+            background: radial-gradient(circle at center, #00f2ff 0%, #0088aa 70%, #004455 100%);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .arc-reactor-btn:hover {
+            animation: arc-pulse 1s infinite;
+            transform: scale(1.02);
+            letter-spacing: 0.6em;
+        }
+        .bg-parallax {
+            animation: drift 30s ease-in-out infinite;
+        }
+        .volumetric-ray {
+            background: radial-gradient(ellipse at top left, rgba(0, 242, 255, 0.15) 0%, transparent 70%);
+            mix-blend-mode: screen;
+        }
+        .dust-particle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .hero-option:hover .hero-glow {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-dark text-slate-100 min-h-screen flex items-center justify-center relative overflow-y-auto font-display py-12 md:py-12">
+    <div class="fixed inset-0 z-0 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/40 to-transparent z-10">
+        </div>
+        <div class="absolute inset-0 bg-background-dark/30 z-10"></div>
+        <div class="bg-parallax w-full h-full bg-cover bg-center"
+            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuACS42ujGgB6sg4V0-TQDPFpEOuyrLxJpfR75pyHw87qV-HGrrK_DXuFnHu0_97R52WCWlFilH5Hz9tQjT6jnwc_Tfg2-Xwa0W2auqsebil7rIzEWYbxmZ6I0cBqKnmW9Qz7yQpmBmfJjuu8bNwhNcVmxchmygIjdVbinoeSRO8_tixpdE3jRl5qRQQd1fkj8jI5qGKrNrfxvpX1PmmtBbWoMmpwe4tajEso8330IDM8fOqzfWeBUOzc4DyY37UubYHTlRiNslsFaU');">
+        </div>
+        <div class="volumetric-ray absolute inset-0 z-20"></div>
+        <div class="absolute inset-0 z-20">
+            <div class="dust-particle w-1 h-1 top-[20%] left-[30%]" style="animation: float-particle 8s infinite 1s">
+            </div>
+            <div class="dust-particle w-[2px] h-[2px] top-[40%] left-[60%]"
+                style="animation: float-particle 12s infinite 0s"></div>
+            <div class="dust-particle w-1 h-1 top-[70%] left-[20%]" style="animation: float-particle 10s infinite 3s">
+            </div>
+            <div class="dust-particle w-[3px] h-[3px] top-[10%] left-[80%]"
+                style="animation: float-particle 15s infinite 2s"></div>
+        </div>
+    </div>
+    <div class="absolute top-10 left-10 z-30 hidden md:flex items-center gap-6">
+        <div class="relative w-16 h-16 flex items-center justify-center">
+            <div
+                class="absolute inset-0 border border-stark-blue/30 rounded-full animate-[rotate-slow_10s_linear_infinite]">
+            </div>
+            <div
+                class="absolute inset-2 border-t-2 border-stark-blue/60 rounded-full animate-[rotate-slow_4s_linear_infinite]">
+            </div>
+            <span class="material-symbols-outlined text-stark-blue text-3xl">verified_user</span>
+        </div>
+        <div class="flex flex-col">
+            <span class="text-[10px] tracking-[0.5em] font-bold text-stark-blue/80 uppercase">Recruitment_Phase_1</span>
+            <span class="text-xs font-mono text-stark-blue uppercase">Biometric_Enrollment_v2.0</span>
+        </div>
+    </div>
+    <div
+        class="absolute bottom-10 left-10 z-30 opacity-40 font-mono text-[9px] text-stark-blue space-y-1 hidden md:block">
+        <p>GEO: 40.7128° N, 74.0060° W</p>
+        <p>CLEARANCE: LEVEL 1 [PENDING]</p>
+        <p>PROTOCOL: NEW_RECRUIT_INIT</p>
+        <div class="w-32 h-1 bg-white/10 mt-2 overflow-hidden">
+            <div class="h-full bg-stark-blue w-1/3"></div>
+        </div>
+    </div>
+    <main class="relative z-40 w-full max-w-[700px] px-6">
+        <div class="absolute -top-4 -left-4 w-12 h-12 border-t-2 border-l-2 border-stark-blue z-50"></div>
+        <div class="absolute -bottom-4 -right-4 w-12 h-12 border-b-2 border-r-2 border-stark-blue z-50"></div>
+        <div class="holographic-card rounded-sm p-1 relative overflow-hidden">
+            <div class="hologram-grid absolute inset-0 pointer-events-none opacity-20"></div>
+            <div class="relative z-10 p-6 md:p-10 flex flex-col items-center">
+                <div class="mb-10 text-center">
+                    <h1 class="text-[10px] font-bold tracking-[0.8em] text-stark-blue mb-4 uppercase">Initiate Protocol
+                    </h1>
+                    <div class="relative group inline-block">
+                        <h2 class="text-2xl md:text-3xl font-black tracking-[0.2em] text-white uppercase italic">New
+                            Recruit Registration</h2>
+                        <div
+                            class="h-1 w-full bg-stark-blue/40 mt-2 scale-x-50 group-hover:scale-x-100 transition-transform">
+                        </div>
+                    </div>
+                </div>
+                <form class="w-full space-y-5" id="signupForm" onsubmit="handleSignup(event)">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="space-y-2 relative group">
+                            <label class="text-[9px] font-bold tracking-[0.3em] text-stark-blue/60 uppercase ml-1">Agent
+                                Identity: FULL_NAME</label>
+                            <div class="relative overflow-hidden">
+                                <input name="full_name"
+                                    class="w-full bg-black/40 border border-stark-blue/20 rounded-none h-12 px-5 text-sm tracking-widest transition-all placeholder:text-slate-700 focus:outline-none focus:border-stark-blue/60 focus:bg-black/60 text-white font-medium"
+                                    placeholder="STEPHEN STRANGE" type="text" required />
+                                <div class="laser-line"></div>
+                                <div class="absolute right-0 top-0 h-full w-1 bg-stark-blue/40"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 relative group">
+                            <label
+                                class="text-[9px] font-bold tracking-[0.3em] text-stark-blue/60 uppercase ml-1">Codename:
+                                USERNAME</label>
+                            <div class="relative overflow-hidden">
+                                <input name="username"
+                                    class="w-full bg-black/40 border border-stark-blue/20 rounded-none h-12 px-5 text-sm tracking-widest transition-all placeholder:text-slate-700 focus:outline-none focus:border-stark-blue/60 focus:bg-black/60 text-white font-medium"
+                                    placeholder="SORCERER_SUPREME" type="text" required />
+                                <div class="laser-line" style="animation-delay: 0.25s"></div>
+                                <div class="absolute right-0 top-0 h-full w-1 bg-stark-blue/40"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="space-y-2 relative group md:col-span-2">
+                            <label
+                                class="text-[9px] font-bold tracking-[0.3em] text-stark-blue/60 uppercase ml-1">Comms:
+                                SECURE_EMAIL</label>
+                            <div class="relative overflow-hidden">
+                                <input name="email"
+                                    class="w-full bg-black/40 border border-stark-blue/20 rounded-none h-12 px-5 text-sm tracking-widest transition-all placeholder:text-slate-700 focus:outline-none focus:border-stark-blue/60 focus:bg-black/60 text-white font-medium"
+                                    placeholder="STARK@AVENGERS.COM" type="email" required />
+                                <div class="laser-line" style="animation-delay: 0.5s"></div>
+                                <div class="absolute right-0 top-0 h-full w-1 bg-stark-blue/40"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="space-y-2 relative group">
+                            <label
+                                class="text-[9px] font-bold tracking-[0.3em] text-stark-blue/60 uppercase ml-1">Master
+                                Key: PASSWORD</label>
+                            <div class="relative overflow-hidden">
+                                <input name="password"
+                                    class="w-full bg-black/40 border border-stark-blue/20 rounded-none h-12 px-5 text-sm tracking-widest transition-all placeholder:text-slate-700 focus:outline-none focus:border-stark-blue/60 focus:bg-black/60 text-white"
+                                    placeholder="••••••••" type="password" required />
+                                <div class="laser-line" style="animation-delay: 1s"></div>
+                                <div class="absolute right-0 top-0 h-full w-1 bg-stark-blue/40"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 relative group">
+                            <label
+                                class="text-[9px] font-bold tracking-[0.3em] text-stark-blue/60 uppercase ml-1">Verify
+                                Key: CONFIRM_PASSWORD</label>
+                            <div class="relative overflow-hidden">
+                                <input name="confirm_password"
+                                    class="w-full bg-black/40 border border-stark-blue/20 rounded-none h-12 px-5 text-sm tracking-widest transition-all placeholder:text-slate-700 focus:outline-none focus:border-stark-blue/60 focus:bg-black/60 text-white"
+                                    placeholder="••••••••" type="password" required />
+                                <div class="laser-line" style="animation-delay: 1.5s"></div>
+                                <div class="absolute right-0 top-0 h-full w-1 bg-stark-blue/40"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-4 pt-4">
+                        <label
+                            class="text-[10px] font-bold tracking-[0.4em] text-stark-blue uppercase text-center block">Choose
+                            Your Hero Class</label>
+                        <input type="hidden" name="hero_class" id="heroClassInput" value="Shield">
+                        <div class="flex justify-center items-center gap-4 flex-wrap">
+                            <button onclick="selectHero('Shield', this)"
+                                class="hero-option group relative w-16 h-16 border border-stark-blue/60 bg-stark-blue/10 flex items-center justify-center transition-all"
+                                type="button">
+                                <div
+                                    class="hero-glow absolute inset-0 bg-stark-blue/20 blur-md opacity-100 transition-opacity">
+                                </div>
+                                <span class="material-symbols-outlined text-stark-blue text-2xl">shield</span>
+                                <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-[1px] bg-stark-blue">
+                                </div>
+                            </button>
+                            <button onclick="selectHero('Striker', this)"
+                                class="hero-option group relative w-16 h-16 border border-stark-blue/20 flex items-center justify-center transition-all hover:border-stark-blue/60 hover:bg-stark-blue/5"
+                                type="button">
+                                <div
+                                    class="hero-glow absolute inset-0 bg-stark-blue/20 blur-md opacity-0 transition-opacity">
+                                </div>
+                                <span
+                                    class="material-symbols-outlined text-stark-blue/60 group-hover:text-stark-blue text-2xl">electric_bolt</span>
+                                <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-[1px] bg-stark-blue">
+                                </div>
+                            </button>
+                            <button onclick="selectHero('Tech', this)"
+                                class="hero-option group relative w-16 h-16 border border-stark-blue/20 flex items-center justify-center transition-all hover:border-stark-blue/60 hover:bg-stark-blue/5"
+                                type="button">
+                                <div
+                                    class="hero-glow absolute inset-0 bg-stark-blue/20 blur-md opacity-0 transition-opacity">
+                                </div>
+                                <span
+                                    class="material-symbols-outlined text-stark-blue/60 group-hover:text-stark-blue text-2xl">precision_manufacturing</span>
+                                <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-[1px] bg-stark-blue">
+                                </div>
+                            </button>
+                            <button onclick="selectHero('Tactical', this)"
+                                class="hero-option group relative w-16 h-16 border border-stark-blue/20 flex items-center justify-center transition-all hover:border-stark-blue/60 hover:bg-stark-blue/5"
+                                type="button">
+                                <div
+                                    class="hero-glow absolute inset-0 bg-stark-blue/20 blur-md opacity-0 transition-opacity">
+                                </div>
+                                <span
+                                    class="material-symbols-outlined text-stark-blue/60 group-hover:text-stark-blue text-2xl">rocket_launch</span>
+                                <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-[1px] bg-stark-blue">
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pt-6">
+                        <button id="signupBtn"
+                            class="arc-reactor-btn w-full text-white font-black tracking-[0.5em] py-6 rounded-none relative overflow-hidden uppercase text-sm group"
+                            type="submit">
+                            <div
+                                class="absolute inset-0 flex items-center justify-center opacity-10 group-hover:opacity-30">
+                                <div
+                                    class="w-64 h-64 border-2 border-white rounded-full animate-[rotate-slow_2s_linear_infinite]">
+                                </div>
+                            </div>
+                            <span class="relative z-10 drop-shadow-lg">Enlist</span>
+                        </button>
+                    </div>
+                </form>
+                <div class="mt-8 flex items-center gap-4 text-[9px] font-bold tracking-widest text-slate-500 uppercase">
+                    <span>Already Registered?</span>
+                    <a class="text-stark-blue hover:text-white transition-colors border-b border-stark-blue/30 hover:border-white"
+                        href="login.html">Access Terminal</a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-8 flex justify-between items-end px-4">
+            <div class="flex flex-col gap-2">
+                <div class="flex gap-2">
+                    <div class="w-8 h-1 bg-stark-blue/40"></div>
+                    <div class="w-2 h-1 bg-stark-blue/20"></div>
+                    <div class="w-2 h-1 bg-stark-blue/20"></div>
+                </div>
+                <span class="text-[8px] tracking-[0.4em] font-mono text-stark-blue/50 uppercase">Security: RSA-4096
+                    Active</span>
+            </div>
+            <div class="text-[8px] tracking-[0.3em] font-bold text-right text-slate-600 font-mono uppercase">
+                Clearance Level 1<br />
+                Provisional Enrollment Only
+            </div>
+        </div>
+    </main>
+    <div
+        class="absolute top-0 right-10 h-full w-px bg-gradient-to-b from-transparent via-stark-blue/20 to-transparent hidden lg:block z-20">
+        <div
+            class="absolute top-1/4 -right-1 flex flex-col gap-12 font-mono text-[8px] text-stark-blue/30 rotate-90 origin-left uppercase">
+            <span>Bitrate: 4.8 GBPS</span>
+            <span>Uplink: Active</span>
+            <span>Ping: 12MS</span>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        function selectHero(heroClass, element) {
+            document.getElementById('heroClassInput').value = heroClass;
+
+            // Update UI
+            const buttons = document.querySelectorAll('.hero-option');
+            buttons.forEach(btn => {
+                btn.classList.remove('border-stark-blue/60', 'bg-stark-blue/10');
+                btn.classList.add('border-stark-blue/20', 'hover:border-stark-blue/60', 'hover:bg-stark-blue/5');
+                btn.querySelector('.hero-glow').classList.remove('opacity-100');
+                btn.querySelector('.hero-glow').classList.add('opacity-0');
+                btn.querySelector('span').classList.remove('text-stark-blue');
+                btn.querySelector('span').classList.add('text-stark-blue/60');
+            });
+
+            element.classList.add('border-stark-blue/60', 'bg-stark-blue/10');
+            element.classList.remove('border-stark-blue/20', 'hover:border-stark-blue/60', 'hover:bg-stark-blue/5');
+            element.querySelector('.hero-glow').classList.remove('opacity-0');
+            element.querySelector('.hero-glow').classList.add('opacity-100');
+            element.querySelector('span').classList.remove('text-stark-blue/60');
+            element.querySelector('span').classList.add('text-stark-blue');
+        }
+
+        async function handleSignup(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            const button = document.getElementById('signupBtn');
+            const originalText = button.innerHTML;
+
+            // Validate passwords match
+            if (data.password !== data.confirm_password) {
+                button.innerHTML = '<span class="relative z-10 drop-shadow-lg">Password Mismatch</span>';
+                button.style.background = 'linear-gradient(45deg, #ff0000, #aa0000)';
+
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                }, 2000);
+                return;
+            }
+
+            try {
+                button.innerHTML = '<span class="relative z-10 drop-shadow-lg animate-pulse">Processing...</span>';
+
+                const response = await fetch('register.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Update auth system (localStorage) for frontend consistency
+                    auth.setAuthStatus(true);
+                    localStorage.setItem("marvelUser", data.username);
+
+                    button.innerHTML = '<span class="relative z-10 drop-shadow-lg">Registration Complete</span>';
+                    button.style.background = 'linear-gradient(45deg, #00ff00, #00aa00)';
+
+                    setTimeout(() => {
+                        window.location.href = "index.html";
+                    }, 1500);
+                } else {
+                    button.innerHTML = `<span class="relative z-10 drop-shadow-lg text-[10px]">${result.message}</span>`;
+                    button.style.background = 'linear-gradient(45deg, #ff0000, #aa0000)';
+
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                        button.style.background = '';
+                    }, 3000);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                button.innerHTML = '<span class="relative z-10 drop-shadow-lg">System Error</span>';
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,183 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "General Sans", sans-serif;
+}
+
+body {
+    background: black;
+    overflow: hidden;
+}
+
+/* ===== Main Container ===== */
+
+.auth-container {
+    width: 100%;
+    height: 100vh;
+    background: radial-gradient(circle at top, #111 0%, #000 70%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* ===== Auth Box ===== */
+
+.auth-box {
+    position: absolute;
+    background: #111;
+    padding: 50px 40px;
+    border-radius: 15px;
+    width: 350px;
+    text-align: center;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(20px);
+
+    /* Glow animation */
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+/* Active Form */
+.auth-box.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    animation: floatBox 4s ease-in-out infinite, glowPulse 3s ease-in-out infinite;
+}
+
+/* ===== Floating Animation ===== */
+
+@keyframes floatBox {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+}
+
+/* ===== Glow Pulse ===== */
+
+@keyframes glowPulse {
+    0% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.3); }
+    50% { box-shadow: 0 0 35px rgba(255, 0, 0, 0.6); }
+    100% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.3); }
+}
+
+/* ===== Titles ===== */
+
+.logo-text {
+    font-size: 32px;
+    color: white;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.auth-box h2 {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+/* ===== Input Fields ===== */
+
+.input-box {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 10px 0;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #555;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-box label {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    color: #888;
+    font-size: 14px;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+/* Floating label effect */
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+    top: -10px;
+    font-size: 12px;
+    color: red;
+}
+
+.input-box input:focus {
+    border-bottom: 2px solid red;
+}
+
+/* ===== Button ===== */
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: red;
+    border: none;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: #ff1a1a;
+    box-shadow: 0 0 20px red;
+}
+
+/* Click effect */
+button:active {
+    transform: scale(0.95);
+}
+
+/* ===== Switch Links ===== */
+
+.switch-links {
+    margin-top: 20px;
+}
+
+.switch-links p {
+    color: #888;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: 0.3s;
+}
+
+.switch-links p:hover {
+    color: red;
+}
+
+/* ===== Error Message ===== */
+.error-message {
+    color: #ff4444;
+    font-size: 12px;
+    margin-top: 10px;
+    min-height: 16px;
+}
+
+/* ===== Success Message ===== */
+.success-message {
+    color: #44ff44;
+    font-size: 12px;
+    margin-top: 10px;
+    min-height: 16px;
+}

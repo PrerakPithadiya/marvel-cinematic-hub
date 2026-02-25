@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Marvel Universe Access</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <link rel="stylesheet" href="assets/css/login.css">
+</head>
+<body>
+
+    <div class="auth-container">
+
+        <!-- Login -->
+        <div class="auth-box active" id="loginForm">
+            <h1 class="logo-text">Marvel</h1>
+            <h2>Member Login</h2>
+
+            <form id="loginFormElement">
+                <div class="input-box">
+                    <input type="text" id="loginUsername" required>
+                    <label>Username</label>
+                </div>
+
+                <div class="input-box">
+                    <input type="password" id="loginPassword" required>
+                    <label>Password</label>
+                </div>
+
+                <button type="submit">Enter Universe</button>
+                <div id="loginMessage" class="error-message"></div>
+            </form>
+
+            <div class="switch-links">
+                <p onclick="showSignup()">Create Account</p>
+                <p onclick="showForgot()">Forgot Password?</p>
+            </div>
+        </div>
+
+        <!-- Signup -->
+        <div class="auth-box" id="signupForm">
+            <h1 class="logo-text">Join Marvel</h1>
+            <h2>Create Account</h2>
+
+            <form id="signupFormElement">
+                <div class="input-box">
+                    <input type="email" id="signupEmail" required>
+                    <label>Email</label>
+                </div>
+               
+                <div class="input-box">
+                    <input type="text" id="signupUsername" required>
+                    <label>Username</label>
+                </div>
+
+                <div class="input-box">
+                    <input type="text" id="signupFullName">
+                    <label>Full Name</label>
+                </div>
+
+                <div class="input-box">
+                    <input type="password" id="signupPassword" required>
+                    <label>Password</label>
+                </div>
+
+                <div class="input-box">
+                    <select id="signupHeroClass" style="width: 100%; background: #111; color: white; border: none; border-bottom: 2px solid #555; padding: 10px 0; outline: none;">
+                        <option value="Soldier">Soldier</option>
+                        <option value="Avenger">Avenger</option>
+                        <option value="Guardian">Guardian</option>
+                        <option value="Hero">Hero</option>
+                    </select>
+                    <label>Hero Class</label>
+                </div>
+
+                <button type="submit">Sign Up</button>
+                <div id="signupMessage" class="error-message"></div>
+            </form>
+
+            <div class="switch-links">
+                <p onclick="showLogin()">Back to Login</p>
+            </div>
+        </div>
+
+        <!-- Forgot Password -->
+        <div class="auth-box" id="forgotForm">
+            <h1 class="logo-text">Reset Access</h1>
+            <h2>Forgot Password</h2>
+
+            <form id="forgotFormElement">
+                <div class="input-box">
+                    <input type="email" id="forgotEmail" required>
+                    <label>Email Address</label>
+                </div>
+
+                <div class="input-box">
+                    <input type="password" id="forgotNewPassword" required>
+                    <label>New Password</label>
+                </div>
+
+                <div class="input-box">
+                    <input type="password" id="forgotConfirmPassword" required>
+                    <label>Confirm Password</label>
+                </div>
+
+                <button type="submit">Reset Password</button>
+                <div id="forgotMessage" class="error-message"></div>
+            </form>
+
+            <div class="switch-links">
+                <p onclick="showLogin()">Back to Login</p>
+            </div>
+        </div>
+
+    </div>
+
+<script src="login.js"></script>
+</body>
+</html>

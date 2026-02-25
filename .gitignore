@@ -1,0 +1,61 @@
+# Git ignore file for Marvel Studio Project
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Log files
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Composer dependencies (if you use PHP composer)
+vendor/
+composer.lock
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Database files
+*.sql~
+*.sqlite
+*.db
+
+# Cache files
+cache/
+tmp/
+
+# Test files (optional - remove if you want to track them)
+/tests/
+/test_*.php
+
+# Build artifacts
+dist/
+build/
+
+# Documentation
+docs/
+*.md~
+
+# Images cache (if applicable)
+images/cache/
+uploads/
