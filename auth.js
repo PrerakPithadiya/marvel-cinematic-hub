@@ -39,7 +39,19 @@ class AuthSystem {
   // Redirect to login if not authenticated
   requireAuth() {
     if (!this.isAuthenticated) {
-      window.location.href = "login.html";
+      // Store the current page URL to redirect back after login
+      localStorage.setItem("redirectAfterLogin", window.location.href);
+      
+      // Calculate path to login.html (this might be different for nested pages)
+      let loginPath = "login.html";
+      if (window.location.pathname.includes("/link/")) {
+          // If we're in a movie watch page (moviecard/hero/link/m*.html)
+          // We are 4 levels deep from root in the typical setup
+          // e.g. /project-mj/moviecard/thor/link/m3.html
+          loginPath = "../../../../login.html";
+      }
+      
+      window.location.href = loginPath;
       return false;
     }
     return true;
@@ -49,13 +61,23 @@ class AuthSystem {
 // Create global auth instance
 const auth = new AuthSystem();
 
-// Auto-redirect on page load if not authenticated
+// Handle "Watch Now" click across all pages
 document.addEventListener("DOMContentLoaded", function () {
-  // Only check auth for protected pages (not login/signup pages)
-  if (
-    !window.location.pathname.includes("login.html") &&
-    !window.location.pathname.includes("signup.html")
-  ) {
-    auth.requireAuth();
-  }
+  console.log("Auth system loaded. Path:", window.location.pathname);
+  
+  // Find all links on the page
+  const links = document.querySelectorAll("a");
+  
+  links.forEach(link => {
+    // Check if the link text is "Watch Now" (case-insensitive)
+    if (link.textContent.trim().toLowerCase() === "watch now") {
+      link.addEventListener("click", function (e) {
+        console.log("Watch Now clicked. Authenticated:", auth.isAuthenticated);
+        if (!auth.isAuthenticated) {
+          e.preventDefault(); // Prevent opening the movie link
+          auth.requireAuth(); // Redirect to login
+        }
+      });
+    }
+  });
 });

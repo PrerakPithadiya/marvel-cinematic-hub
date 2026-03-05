@@ -58,7 +58,13 @@ document.getElementById('loginFormElement').addEventListener('submit', async fun
             
             // Redirect after delay
             setTimeout(() => {
-                window.location.href = 'index.html';
+                const redirectUrl = localStorage.getItem('redirectAfterLogin');
+                if (redirectUrl) {
+                    localStorage.removeItem('redirectAfterLogin');
+                    window.location.href = redirectUrl;
+                } else {
+                    window.location.href = 'index.html';
+                }
             }, 1000);
         } else {
             messageElement.className = 'error-message';
